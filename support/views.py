@@ -1,12 +1,7 @@
-from django.shortcuts import render,redirect, get_object_or_404
+from rest_framework import viewsets
 from customer.models import ServiceRequest
+from customer.serializers import ServiceRequestSerializer
 
-def manage_requests(request):
-    requests = ServiceRequest.objects.filter(status='submitted')
-    return render(request, 'support/manage_requests.html', {'requests': requests})
-
-def resolve_request(request, request_id):
-    service_request = get_object_or_404(ServiceRequest, id=request_id)
-    service_request.status = 'resolved'
-    service_request.save()
-    return redirect('manage_requests')
+class SupportRequestViewSet(viewsets.ModelViewSet):
+    queryset = ServiceRequest.objects.all()
+    serializer_class = ServiceRequestSerializer

@@ -1,7 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import SupportRequestViewSet
+
+router = DefaultRouter()
+router.register(r'requests', SupportRequestViewSet)
 
 urlpatterns = [
-    path('requests/', views.manage_requests, name='manage_requests'),
-    path('resolve/<int:request_id>/', views.resolve_request, name='resolve_request'),
+    path('', include(router.urls)),
 ]

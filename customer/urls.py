@@ -1,7 +1,8 @@
-from django.urls import path
-from . import views
+from rest_framework import routers
+from .views import CustomerViewSet, ServiceRequestViewSet
 
-urlpatterns = [
-    path('submit/', views.submit_request, name='submit_request'),
-    path('status/', views.request_status, name='request_status'),
-]
+router = routers.DefaultRouter()
+router.register(r'customers', CustomerViewSet)
+router.register(r'service-requests', ServiceRequestViewSet)
+
+urlpatterns = router.urls

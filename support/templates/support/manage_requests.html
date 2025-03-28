@@ -1,8 +1,0 @@
-<h2>Manage Service Requests</h2>
-<ul>
-    {% for request in requests %}
-        <li>{{ request.customer.name }} - {{ request.request_type }} - 
-            <a href="{% url 'resolve_request' request.id %}">Resolve</a>
-        </li>
-    {% endfor %}
-</ul>
